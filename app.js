@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
 import mongoose from "mongoose";
+import SessionController from "./session-controller.js";
 import PostingsController from "./controllers/postings/postings-controller.js";
 import UserController from "./controllers/users/users-controller.js";
 
@@ -31,6 +32,8 @@ app.use(session({
     cookie: { secure: false }
 }))
 app.use(express.json())
+
+SessionController(app)
 PostingsController(app)
 UserController(app)
 app.listen(4000)
