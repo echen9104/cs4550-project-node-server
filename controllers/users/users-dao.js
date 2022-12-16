@@ -15,9 +15,10 @@ export const findAllUsers = async () =>
 export const deleteUser = async (uid) =>
     await usersModel.deleteOne({_id: uid})
 
-export const updateUser = async (uid, userUpdates) =>
+export const updateUser = async (uid, userUpdates) => {
     await usersModel.updateOne({_id: uid},
         {$set: userUpdates})
+}
 
 export const findUserById = (uid) =>
     usersModel.findById(uid, {password: false})
