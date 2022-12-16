@@ -22,7 +22,7 @@ const findPostingsByUser  = async (req, res) => {
     }
 }
 
-const findPostingsBySku  = async (req, res) => {
+const findPostingsBySku = async (req, res) => {
     try {
         const sku = req.params.skuID
         const postings = await postingsDao.findPostingsBySku(sku)
