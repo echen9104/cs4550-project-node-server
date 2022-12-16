@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import SessionController from "./session-controller.js";
 import PostingsController from "./controllers/postings/postings-controller.js";
 import UserController from "./controllers/users/users-controller.js";
-
+import WatchingsController from "./controllers/watchings/watchings-controller.js";
 
 const options = {
     useNewUrlParser: true,
@@ -38,4 +38,5 @@ app.use(express.json())
 SessionController(app)
 PostingsController(app)
 UserController(app)
+WatchingsController(app)
 app.listen(4000)
