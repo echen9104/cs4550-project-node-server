@@ -2,40 +2,31 @@ import * as postingsDao from './postings-dao.js'
 
 const createPosting = async (req, res) => {
     try {
-        const newPosting = req.body
-        const insertedPosting = await postingsDao.createPosting(newPosting);
-        res.json(insertedPosting)
+        const post = req.body
+        const currentUser = req.session['currentUser']
+        post.user = currentUser._id
+        const actualPost = await postingsDao.createPosting(post)
+        res.json(actualPost)
     } catch (err) {
         res.sendStatus(503)
     }
 }
 
-const findPostings  = async (req, res) => {
+const findPostingsByUser  = async (req, res) => {
     try {
         const user = req.params.user
-        const postings = await postingsDao.findPostings(user)
+        const postings = await postingsDao.findPostingsByUser(user)
         res.json(postings)
     } catch (err) {
         res.sendStatus(503)
     }
 }
 
-const updatePosting = async (req, res) => {
+const findPostingsBySku  = async (req, res) => {
     try {
-        const postingIdToUpdate = req.params.pid;
-        const updates = req.body;
-        const status = await postingsDao.updatePosting(postingIdToUpdate, updates);
-        res.json(status);
-    } catch (err) {
-        res.sendStatus(503)
-    }
-}
-
-const deletePosting = async (req, res) => {
-    try {
-        const postingIdToDelete = req.params.pid
-        const status = await postingsDao.deletePosting(postingIdToDelete);
-        res.json(status)
+        const sku = req.params.skuID
+        const postings = await postingsDao.findPostingsBySku(sku)
+        res.json(postings)
     } catch (err) {
         res.sendStatus(503)
     }
@@ -43,8 +34,7 @@ const deletePosting = async (req, res) => {
 
 
 export default (app) => {
-    app.post('/api/postings', createPosting);
-    app.get('/users/:user/postings', findPostings);
-    app.put('/api/postings/:pid', updatePosting);
-    app.delete('/api/postings/:pid', deletePosting);
+    app.get('/users/:user/postings', findPostingsByUser);
+    app.get('/postings/:skuID', findPostingsBySku);
+    app.post('/postings', createPosting);
 }

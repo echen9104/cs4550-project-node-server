@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import UsersModel from "../users/users-model.js";
 
 const schema = mongoose.Schema({
+    name: String,
+    image: String,
     asking: Number,
     skuID: String,
     user: {
