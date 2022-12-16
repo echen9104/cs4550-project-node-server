@@ -19,16 +19,16 @@ const WatchingsController = (app) => {
         res.json(watchings)
     }
 
-    const findWatchingsLikedByUser = async (req, res) => {
+    const findPostingsWatchedByUser = async (req, res) => {
         const uid = req.params.uid
-        const watchings = await watchingsDao.findWatchingsLikedByUser(uid)
+        const watchings = await watchingsDao.findPostingsWatchedByUser(uid)
         res.json(watchings)
     }
 
     app.post('/users/watches/:pid', userWatchesPosting)
     app.delete('/users/unwatches/:pid', userUnwatchesPosing)
     app.get('/watchings', findAllWatchings)
-    app.get('/users/:uid/watchings', findWatchingsLikedByUser)
+    app.get('/users/:uid/watchings', findPostingsWatchedByUser)
 }
 
 export default WatchingsController;

@@ -8,7 +8,7 @@ export const userUnwatchesPosing = async(uid, pid) => {
     await watchingsModel.deleteOne({user: uid, posting: pid})
 }
 
-export const findWatchingsLikedByUser = async(uid) => {
+export const findPostingsWatchedByUser = async(uid) => {
     return await watchingsModel
         .find({user: uid}, {user: false})
         .populate('posting', 'name')
