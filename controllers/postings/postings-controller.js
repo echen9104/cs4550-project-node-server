@@ -3,9 +3,6 @@ import * as postingsDao from './postings-dao.js'
 const createPosting = async (req, res) => {
     try {
         const newPosting = req.body
-        newPosting.shoe = ""
-        newPosting.price = 0
-        newPosting.condition = "new"
         const insertedPosting = await postingsDao.createPosting(newPosting);
         res.json(insertedPosting)
     } catch (err) {
@@ -15,7 +12,8 @@ const createPosting = async (req, res) => {
 
 const findPostings  = async (req, res) => {
     try {
-        const postings = await postingsDao.findPostings()
+        const user = req.params.user
+        const postings = await postingsDao.findPostings(user)
         res.json(postings)
     } catch (err) {
         res.sendStatus(503)
@@ -46,7 +44,7 @@ const deletePosting = async (req, res) => {
 
 export default (app) => {
     app.post('/api/postings', createPosting);
-    app.get('/api/postings', findPostings);
+    app.get('/users/:user/postings', findPostings);
     app.put('/api/postings/:pid', updatePosting);
     app.delete('/api/postings/:pid', deletePosting);
 }
