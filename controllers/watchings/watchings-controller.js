@@ -2,8 +2,8 @@ import * as watchingsDao from "./watchings-dao.js";
 
 const WatchingsController = (app) => {
     const userWatchesPosting = async (req, res) => {
-        const pid = req.session['currentUser']._id
-        const mid = req.params.mid
+        const uid = req.session['currentUser']._id
+        const pid = req.params.mid
         const newWatching = await watchingsDao.userWatchesPosting(uid, pid)
         res.json(newWatching)
     }
