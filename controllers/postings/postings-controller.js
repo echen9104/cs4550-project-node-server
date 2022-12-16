@@ -32,9 +32,15 @@ const findPostingsBySku  = async (req, res) => {
     }
 }
 
+const deletePosting = async (req, res) => {
+    const pid = req.params.pid
+    const status = await postingsDao.deletePosting(pid)
+    res.send(status)
+}
 
 export default (app) => {
     app.get('/users/:user/postings', findPostingsByUser);
     app.get('/postings/:skuID', findPostingsBySku);
     app.post('/postings', createPosting);
+    app.delete('/postings/:pid', deletePosting);
 }
