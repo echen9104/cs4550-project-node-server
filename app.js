@@ -19,7 +19,7 @@ const options = {
 
 const CONNECTION_STRING = 'mongodb+srv://cs4550:project@postings.u9fsees.mongodb.net/?retryWrites=true&w=majority'
 console.log(CONNECTION_STRING)
-mongoose.connect(CONNECTION_STRING, options);
+mongoose.connect(CONNECTION_STRING,options);
 
 const app = express();
 app.use(cors({
@@ -32,6 +32,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }))
+// app.use(cors)
 app.use(express.json())
 
 SessionController(app)
